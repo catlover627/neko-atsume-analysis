@@ -1,6 +1,6 @@
 # Neko Atsume Analysis
 
-A tool for optimizing your Neko Atsume yard setup to maximize fish earnings and cat visits. Algorithms based on Neko Atsume 2 V1.0.0. Data based on Neko Atsume 2 V1.5.0.
+A tool for optimizing your Neko Atsume yard setup to maximize fish earnings and cat visits. Algorithms based on Neko Atsume 2 V1.0.0. Data based on Neko Atsume 2 V1.20.0.
 
 ## Description
 
@@ -14,6 +14,7 @@ This tool analyzes different yard configurations in Neko Atsume to help you:
 - Custom grouping options for analyzing specific item combinations for your yard
 
 ## A Note for New Players
+
 If you are here, you are definitely trying to min-max the game :). I hear ya. One suggestion for you is to use silver fish to get the expansion asap. 
 1. The conversion rate is more favorable (1:27.8) than other types. Other ones which is almost 25.
 2. It's just faster. Suppose you only have Beach Umbrella, (5000 + 340 + 12.28 / 24 * 8 * 10) / 438.127 = 12.28 days (assuming you have food ALL THE TIME) vs 180 / 9.490 = 18.96 days. A full yard can save you 40% of the time to get to that juicy expansion.
@@ -49,20 +50,20 @@ python analyze.py --group_def custom --items_of_interest_indoors 1 2 3 --items_o
 
 ## Command-Line Arguments
 
-| Argument | Type | Default | Description |
-|----------|------|---------|-------------|
-| `--food_type` | int | 2 | Type of food to place:<br>1=Thrifty Bitz<br>2=Frisky Bitz<br>3=Ritzy Bitz<br>4=Bonito Bitz<br>5=Deluxe Tuna Bitz<br>6=Sashimi<br>7=Sashimi Boat<br>99=idk |
-| `--item_damage_state` | int | 0 | State of item damage:<br>0=Good<br>1=Broken<br>2=Fixed |
-| `--weather` | int | 0 | Weather condition:<br>0=None<br>1=Spring<br>2=Summer<br>4=Autumn<br>8=Winter<br>16=Snow<br>32=Burning |
-| `--is_indoor` | bool | False | If set, considers the yard as an indoor space. Ignored when group_def is 'custom' |
-| `--output_type` | str | "gold_equiv" | Type of output to generate. Options:<br>- `silver`: Silver fish<br>- `gold`: Gold fish<br>- `silver_equiv`: Silver fish equivalent<br>- `gold_equiv`: Gold fish equivalent<br>- `cat_probability`: Probability (0-1) of a specific cat appearing <br>- `stay_rate`: Summed probability (0-1) of any specific cat appearing over all playspaces |
-| `--total_duration_minutes` | int | 1440 | Duration in minutes over which to aggregate the selected output_type. Ignored when output_type is 'cat_probability' |
-| `--cat_id` | int | None | ID of the specific cat to analyze when output_type is 'cat_probability' |
-| `--group_def` | str | "item" | Defines how to group items where a single cat cannot appear simultaneously:<br>- `playspace`: Individual seats within goodies (Turns off the consideration of whether the same can appear at different places at the same time)<br>- `item`: Entire goodie<br>- `custom`: User-defined groups via items_of_interest arguments |
-| `--items_of_interest_indoors` | List[int] | None | List of goodie IDs to analyze as indoor items. Only used when group_def is 'custom' |
-| `--items_of_interest_outdoors` | List[int] | None | List of goodie IDs to analyze as outdoor items. Only used when group_def is 'custom' |
-| `--num_iterations_for_cat_on_cat` | int | 10 | Number of iterations to simulate cat-on-cat interactions |
-| `--filter_by_na2` | bool | False | Filter results to only include items that are in NA2 |
+| Argument                          | Type      | Default      | Description                                                                                                                                                                                                                                                                                                                                    |
+| --------------------------------- | --------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--food_type`                     | int       | 2            | Type of food to place:<br>1=Thrifty Bitz<br>2=Frisky Bitz<br>3=Ritzy Bitz<br>4=Bonito Bitz<br>5=Deluxe Tuna Bitz<br>6=Sashimi<br>7=Sashimi Boat<br>99=idk                                                                                                                                                                                      |
+| `--item_damage_state`             | int       | 0            | State of item damage:<br>0=Good<br>1=Broken<br>2=Fixed                                                                                                                                                                                                                                                                                         |
+| `--weather`                       | int       | 0            | Weather condition:<br>0=None<br>1=Spring<br>2=Summer<br>4=Autumn<br>8=Winter<br>16=Snow<br>32=Burning                                                                                                                                                                                                                                          |
+| `--is_indoor`                     | bool      | False        | If set, considers the yard as an indoor space. Ignored when group_def is 'custom'                                                                                                                                                                                                                                                              |
+| `--output_type`                   | str       | "gold_equiv" | Type of output to generate. Options:<br>- `silver`: Silver fish<br>- `gold`: Gold fish<br>- `silver_equiv`: Silver fish equivalent<br>- `gold_equiv`: Gold fish equivalent<br>- `cat_probability`: Probability (0-1) of a specific cat appearing <br>- `stay_rate`: Summed probability (0-1) of any specific cat appearing over all playspaces |
+| `--total_duration_minutes`        | int       | 1440         | Duration in minutes over which to aggregate the selected output_type. Ignored when output_type is 'cat_probability'                                                                                                                                                                                                                            |
+| `--cat_id`                        | int       | None         | ID of the specific cat to analyze when output_type is 'cat_probability'                                                                                                                                                                                                                                                                        |
+| `--group_def`                     | str       | "item"       | Defines how to group items where a single cat cannot appear simultaneously:<br>- `playspace`: Individual seats within goodies (Turns off the consideration of whether the same can appear at different places at the same time)<br>- `item`: Entire goodie<br>- `custom`: User-defined groups via items_of_interest arguments                  |
+| `--items_of_interest_indoors`     | List[int] | None         | List of goodie IDs to analyze as indoor items. Only used when group_def is 'custom'                                                                                                                                                                                                                                                            |
+| `--items_of_interest_outdoors`    | List[int] | None         | List of goodie IDs to analyze as outdoor items. Only used when group_def is 'custom'                                                                                                                                                                                                                                                           |
+| `--num_iterations_for_cat_on_cat` | int       | 10           | Number of iterations to simulate cat-on-cat interactions                                                                                                                                                                                                                                                                                       |
+| `--filter_by_na2`                 | bool      | False        | Filter results to only include items that are in NA2                                                                                                                                                                                                                                                                                           |
 
 ## Output Types Explained
 
@@ -105,13 +106,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Acknowledgments
 
-- Based on game data from Neko Atsume 2, V1.0.0 by Hit-Point Co.,Ltd. Thanks a lot for this cute cats game!!!
+- Based on game data from Neko Atsume 2, V1.0.0 by Hit-Point Co., Ltd. Thanks a lot for this cute cats game!!!
 - All the previous efforts! [1](https://www.reddit.com/r/nekoatsume/comments/blmtwo/neko_atsume_data_mining_spreadsheet_update_1130/), [2](https://www.reddit.com/r/nekoatsume/comments/fhwtb3/neko_atsume_datamining_webapp/), [3](https://www.reddit.com/r/nekoatsume/comments/1gb7qap/neko_atsume_2_datamining_thread/), [4](https://www.reddit.com/r/nekoatsume/comments/42cuc2/reverse_engineering_and_data_mining_neko_atsume/), [5](https://www.reddit.com/r/nekoatsume/comments/5q69v1/which_is_the_best_goodie_per_feed_goodie_analysis/) and more.
 
 ## High Level Overview
+
 ![](figs/flowchart.svg)
 
 ## Notes/Caveats
+
 - After computing the same cat interaction, I should still update the cat-on-cat charm value, but I didn't do that. 
 - The same cat interaction implementation is wrong. It should give some approximation. It'd be nice if someone can pick it up! 
 - I did not do Sapphire & Jeeves calculation as 
@@ -128,4 +131,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Address the caveats
 
 ## Outputs 
+
 You can find ran data in the [ran_tables](ran_tables/) folder! They are formatted as `Location, Output Type, Food, Item Damage State.md` and it accumulates the expected fish over an entire day (except for Peach Occur Chance). 
